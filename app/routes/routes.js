@@ -1,5 +1,6 @@
 module.exports = (app) => {
     const notes = require('../controllers/note.controller.js');
+    const guessTheWord = require('../controllers/guessTheWord.controller.js');
 
     // Create a new Note
     app.post('/notes', notes.create);
@@ -15,4 +16,8 @@ module.exports = (app) => {
 
     // Delete a Note with noteId
     app.delete('/notes/:noteId', notes.delete);
+
+    // Create a new Note
+    app.post('/addUser', guessTheWord.User.create);
+
 }

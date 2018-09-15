@@ -1,3 +1,5 @@
+var http = require('http');
+var MongoClient = require('mongodb').MongoClient;
 module.exports = {
-    url: 'mongodb://kmt:kmt@123@ds157742.mlab.com:57742/easy-notes'
+    url: 'mongodb://@ds157742.mlab.com:57742/easy-notes'
 }
