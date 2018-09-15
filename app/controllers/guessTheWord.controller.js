@@ -13,6 +13,7 @@ exports.User = {
         // Create a Note
         const user = new User({
             uname: req.body.uname || "Untitled", 
+            email: req.body.email,
             extraInfo: req.body.extraInfo
         });
     
