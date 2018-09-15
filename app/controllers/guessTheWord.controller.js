@@ -1,5 +1,6 @@
 const User = require('../models/guessTheWord.model.js');
-
+var jwt = require('jwt-simple');
+const config = require('../constants/config')
 exports.User = {
     create : (req, res) => {
         // Validate request
@@ -17,10 +18,20 @@ exports.User = {
             extraInfo: req.body.extraInfo
         });
     
+        const payload = {
+            email: req.body.email
+        }
+        
+        // encode
+
+        const token = jwt.encode(payload, config.JWT_SECRET);
+        console.log("OOOOOOOO", config.JWT_SECRET, token)
+
+
         // Save Note in the database
         user.save()
         .then(data => {
-            res.send(data);
+            res.send({data: data, token:token});
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while creating the Note."
