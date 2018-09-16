@@ -40,7 +40,8 @@ get : (req, res) => {
     if(!req.headers.token){
         res.status(500).send({
             message: "Token is missing"
-        });   
+        });  
+        return; 
     }
     const token = jwt.decode(req.headers.token, config.JWT_SECRET);
     User.find({email: token.email}).then((data) =>{
