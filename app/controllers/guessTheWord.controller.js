@@ -37,7 +37,12 @@ exports.User = {
 
 exports.Quiz = {
 get : (req, res) => {
-    const token = jwt.decode('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImFmZEBkZGQuZGQifQ.c4IhtOQQABMk6kW1AqaYq9CcelvWV4I7BMmTP-nN-YM', config.JWT_SECRET);
+    if(!req.headers.token){
+        res.status(500).send({
+            message: "Token is missing"
+        });   
+    }
+    const token = jwt.decode(req.headers.token, config.JWT_SECRET);
     User.find({email: token.email}).then((data) =>{
         if(data.length){
             Quiz.find().then(notes => {
