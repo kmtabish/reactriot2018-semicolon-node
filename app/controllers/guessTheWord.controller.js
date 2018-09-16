@@ -46,7 +46,8 @@ get : (req, res) => {
     const token = jwt.decode(req.headers.authorization, config.JWT_SECRET);
     User.find({email: token.email}).then((data) =>{
         if(data.length){
-            Quiz.find().then(notes => {
+            console.log("LLLLLLLLLLL", req.body)
+            Quiz.find({type: !req.body.type ?  'S' : req.body.type}).then(notes => {
                 res.send(notes);
             }).catch(err => {
                 res.status(500).send({

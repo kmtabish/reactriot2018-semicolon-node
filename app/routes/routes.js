@@ -19,7 +19,7 @@ module.exports = (app) => {
 
     // Create a new Note
     app.post('/addUser', guessTheWord.User.create);
-    app.get('/quiz', guessTheWord.Quiz.get);
+    app.post('/quiz', guessTheWord.Quiz.get);
 
 
 }
