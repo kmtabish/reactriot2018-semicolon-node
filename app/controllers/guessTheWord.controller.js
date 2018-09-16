@@ -37,13 +37,13 @@ exports.User = {
 
 exports.Quiz = {
 get : (req, res) => {
-    if(!req.headers.token){
+    if(!req.headers.authorization){
         res.status(500).send({
             message: "Token is missing"
         });  
         return; 
     }
-    const token = jwt.decode(req.headers.token, config.JWT_SECRET);
+    const token = jwt.decode(req.headers.authorization, config.JWT_SECRET);
     User.find({email: token.email}).then((data) =>{
         if(data.length){
             Quiz.find().then(notes => {
